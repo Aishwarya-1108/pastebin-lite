@@ -1,15 +1,6 @@
-import { NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(
-  _req: Request,
-  { params }: { params: { id: string } }
-) {
-  const paste = await redis.get(`paste:${params.id}`);
-
-  if (!paste) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
-
-  return NextResponse.json(paste);
+export async function GET(_req: NextRequest) {
+  // Simple health check response
+  return NextResponse.json({ status: "ok" });
 }
